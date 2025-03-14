@@ -1,9 +1,0 @@
-{
-  "textFontFamily": "CaskaydiaCove Nerd Font",
-  "monospaceFontFamily": "CaskaydiaCove Nerd Font Mono",
-  "baseFontSize": 15,
-  "interfaceFontFamily": "CaskaydiaCove Nerd Font Mono",
-  "enabledCssSnippets": [
-    "mermaid-size"
-  ]
-}
