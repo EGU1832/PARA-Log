@@ -40,7 +40,7 @@
 # glTF Overview
 
 #### Reference
-![](../../../z.%20Docs/img/gltfOverview-2.0.0d.png)
+![](../../../Z.%20Docs/img/gltfOverview-2.0.0d.png)
 - [glTF – Runtime 3D Asset Delivery (github.com)](https://github.com/KhronosGroup/glTF)
 - [glTF Viewer](https://gltf-viewer.donmccurdy.com/)
 - [glTF Project Explorer (khronos.org)](https://github.khronos.org/glTF-Project-Explorer/)
@@ -66,7 +66,7 @@ glTF의 코어는 **JSON 파일**의 형태로 3D 모델들을 포함하고 있�
 ## 1.2 Concepts
 
 다음은 Top-Level 요소간의 관계를 시각화 한것이다. `뭔가 많다.. 복잡하다..`
-![350](../../../z.%20Docs/img/Pasted%20image%2020240701161627.png)
+![350](../../../Z.%20Docs/img/Pasted%20image%2020240701161627.png)
 
 #### Binary Data references - URI
 3D 요소를 렌더링하는 데 필요한 외부 파일들은 `buffers`와 `images`에 저장된다.  
@@ -102,8 +102,8 @@ MIME 타입 `data:MIMtype`을 정의하고, base64 `base64,string` 형식으로 
 #### Hierarchy
 glTF에서 각각의 **Scene**은 **Node**의 인덱스 배열을 포함하고,  
 각각의 **Node**는 그 **Chidren**의 인덱스 배열을 포함한다.
-![200](../../../z.%20Docs/img/Pasted%20image%2020240701172826.png)
-![200](../../../z.%20Docs/img/Pasted%20image%2020240701172858.png)
+![200](../../../Z.%20Docs/img/Pasted%20image%2020240701172826.png)
+![200](../../../Z.%20Docs/img/Pasted%20image%2020240701172858.png)
 
 #### Node Component
 Node에는 Local Transform 즉, MC에서 WC로 가기위한 $M_M$에 관한 정보가 저장되어있다.  
@@ -187,7 +187,7 @@ Node들은 Vertex Skinning에 쓰이기도 하는데, 움직이는 모델의 Ske
 Type Perspective의 각 요소에 관한 내용은 다음을 상기하자.
 #### Setup for Viewing Volume
 > `glm::mat4 perspective(float fovy, float aspect, float zNear, float zFar);`
-![400](../../../z.%20Docs/img/Pasted%20image%2020240514123644.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240514123644.png)
 - `fovy`: 위 아래 각도
 - `aspect`: $w/h$ 가로 세로 비율
 - `zNear`: 앞 절단 평면까지의 거리
@@ -196,7 +196,7 @@ Type Perspective의 각 요소에 관한 내용은 다음을 상기하자.
 Type Orthographic의 각 요소에 관한 내용은 다음을 상기하자.
 #### Setup for Viewing Volume
 > glm::mat4 glm::ortho(float left, float right, float bottom, float top, float zNear, float zFar);
-![400](../../../z.%20Docs/img/Pasted%20image%2020240514123606.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240514123606.png)
 - `left, bottom`: 왼쪽 아래 꼭짓점
 - `right, top`: 오른쪽 위 꼭짓점
 - `zNear, zFar`: 원근 투영 `perspective()`과 같음
@@ -211,7 +211,7 @@ Camera의 Matrix, 다른 말로 **Projection Transformation**, 기호로 $M_P$�
 - **Rendering Mode**: `POINT`, `LINES`, `TRIANCLES` 중 어느 모드로 렌더링할지 상수로 표기한다.
 - **Indices**: 해당 data의 Accessor의 인덱스를 통해 참조
 - **Attributes**: 해당 data의 Accessor의 인덱스를 통해 참조하며, 다음과 같이 정보가 저장되어있다.
-	![400](../../../z.%20Docs/img/Pasted%20image%2020240701190936.png)
+	![400](../../../Z.%20Docs/img/Pasted%20image%2020240701190936.png)
 - **Meterial**: 관련 Meterial의 인덱스
 ```json
 "meshes": [
@@ -372,11 +372,11 @@ Accessor의 몇몇 부분만 디폴트값과 다른 경우(대부분의 경우�
  }
 ]
 ```
-![300](../../../z.%20Docs/img/Pasted%20image%2020240702161253.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240702161253.png)
 그러니까 value array를 indices array를 통하여 access 하는 것이다.
 
 #### Complete Overview
-![450](../../../z.%20Docs/img/Pasted%20image%2020240702143554.png)
+![450](../../../Z.%20Docs/img/Pasted%20image%2020240702143554.png)
 위 사진에선 mesh primitive로 쓰이는 2D 텍스처 좌표를 접근하는 예시이다.  
 **glBindBuffer**로 
 **glVertexAttribPointer**
@@ -395,7 +395,7 @@ glVertexAttribPointer: 현재 바인딩된 버퍼에서 vertex 속성 데이터�
 여기서 나오는 것이 **물리 기반 렌더링, PBR**이다. 이는 모든 Renderer에서 안정정으로 돌아가게 하도록 하기 위한 기법이다.  
 
 #### Metallic-Roughness-Model
-![300](../../../z.%20Docs/img/Pasted%20image%2020240703131025.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240703131025.png)
 기본적으로 사용하는 Meterial Model은 Metallic-Roughness-Model이다.  
 위 표에서 보는 것처럼, $[0.0, 1.0] \times [0.0, 1.0]$ 까지의 값으로 거칠기와 금속성을 표시한다.  
 코드에서는 **pbrMetallicRoughness** 객체로 표현된다.  
@@ -440,7 +440,7 @@ glVertexAttribPointer: 현재 바인딩된 버퍼에서 vertex 속성 데이터�
 ```
 
 #### Meterial Properties in Textures
-![600](../../../z.%20Docs/img/Pasted%20image%2020240703135444.png)
+![600](../../../Z.%20Docs/img/Pasted%20image%2020240703135444.png)
 Meterial에서도 마찬가지로 Textures를 참조할 때 인덱스로 참조한다.  
 ```json
 "meshes": [
@@ -533,7 +533,7 @@ glTF에서 Skinning은 Rigging이 되어있다는 전제 하에 돌아가는 것
 
 따라서 Node는 **Mesh**도, **Skin**도 가리킬 수 있다.  
 
-![150](../../../z.%20Docs/img/Pasted%20image%2020240703190129.png)
+![150](../../../Z.%20Docs/img/Pasted%20image%2020240703190129.png)
 
 다음은 위 그림의 구조를 나타낸 코드이다.
 ```json
@@ -606,7 +606,7 @@ glTF에서 Skinning은 Rigging이 되어있다는 전제 하에 돌아가는 것
 ### 1.9.1 Computing the Skinning Matrix
 
 먼저 사진으로 개념을 잡고가자면 다음과 같다.
-![150](../../../z.%20Docs/img/Pasted%20image%2020240703191629.png)![192](../../../z.%20Docs/img/Pasted%20image%2020240703191648.png)![600](../../../z.%20Docs/img/Pasted%20image%2020240703191710.png)
+![150](../../../Z.%20Docs/img/Pasted%20image%2020240703191629.png)![192](../../../Z.%20Docs/img/Pasted%20image%2020240703191648.png)![600](../../../Z.%20Docs/img/Pasted%20image%2020240703191710.png)
 
 #### Computing the Joint Matrices
 > `jointMatrix[j] = inverse(globalTransform) * globalJointTransform[j] * inverseBindMatrix[j];
@@ -680,14 +680,14 @@ Morph Target의 Weight에 영향을 주어 물체에 변형을 일으킬 수도 
 ```
 
 #### Animation Samplers
-![600](../../../z.%20Docs/img/Pasted%20image%2020240704133344.png)
+![600](../../../Z.%20Docs/img/Pasted%20image%2020240704133344.png)
 만약 키 프레임 시간이 0.8, 1.6이고 그 사이의 값인 1.2가 input으로 지정되었을 때,  
 지정한 보간 법에 따라 Interpolation이 일어난다.
 
 #### Animation Channel Targets
-![400](../../../z.%20Docs/img/Pasted%20image%2020240704133409.png)
-![400](../../../z.%20Docs/img/Pasted%20image%2020240704133423.png)
-![400](../../../z.%20Docs/img/Pasted%20image%2020240704133445.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240704133409.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240704133423.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240704133445.png)
 
 ## 1.11 Binary glTF Files
 
@@ -703,7 +703,7 @@ glTF에서 External Binary Resource를 포함시킬 때 두 가지 옵션이 존
 - **header**: 버전과 데이터 구조 증 기본 정보 제공
 - **chunks**: 실제 데이터 포함, 첫번째 chunk는 항상 JSON 데이터이다.
 자세한 구조는 밑의 그림의 설명을 찬찬히 읽어보면 쉽게 이해될 것이다.
-![](../../../z.%20Docs/img/Pasted%20image%2020240704134859.png)
+![](../../../Z.%20Docs/img/Pasted%20image%2020240704134859.png)
 
 ## 1.12 Extensions
 
@@ -737,7 +737,7 @@ glTF에는 여러 함수를 추가할 수 있는 **Extension**들이 존재한�
 ```
 
 다음은 현재 존재하는 Extension들이다.
-![](../../../z.%20Docs/img/Pasted%20image%2020240704140518.png)
+![](../../../Z.%20Docs/img/Pasted%20image%2020240704140518.png)
 Draco로 압축하거나,  
 Point Light, Spot light, Directional Light를 지원하고나,
 ![200](https://www.kitware.com/main/wp-content/uploads/2021/01/carbonComp0-1024x508.png) (PBR objext Clear Coating)  

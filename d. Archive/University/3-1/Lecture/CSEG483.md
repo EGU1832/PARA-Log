@@ -84,35 +84,35 @@ else if(obj.1) {
 ## 1.10 NVIDIA GPU Architecture
 
 - 기본 terminology
-	- Kernel: CPU가 아니라 GPU에서 돌아가는 함수![](../../../../z.%20Docs/img/Pasted%20image%2020240307170931.png)![](../../../../z.%20Docs/img/Pasted%20image%2020240307171054.png)
+	- Kernel: CPU가 아니라 GPU에서 돌아가는 함수![](../../../../Z.%20Docs/img/Pasted%20image%2020240307170931.png)![](../../../../Z.%20Docs/img/Pasted%20image%2020240307171054.png)
 	1. Thread: SIMD 형태로  kernel 함수가 돌아가는 각각의 task
 	2. Thread block: Thread를 같은 크기로 묶어 놓은 것 $2^{22}$ 의 thread를 $2^8$ 의 tread block으로 묶으면 $2^{14}$ 개이다. 항상 동일한 개수로 묶어야 한다.
 		- Thread block dimension: 이것이 결정되면 몇개의 thread block이 나올지 결정된다. (ex. 128, 256..)
 		- `Thread block dimension은 32의 배수로 해라... 되도록이면...`
 		- [Thread block (CUDA programming) - Wikipedia](https://en.wikipedia.org/wiki/Thread_block_(CUDA_programming))
-		- thread를 이런 모양으로 만드면 warp가 이렇게 잡힌다.![](../../../../z.%20Docs/img/Pasted%20image%2020240312165837.png)
-		- Cache적 관점에서는 thread를 이렇게 만드는 게 났다.![](../../../../z.%20Docs/img/Pasted%20image%2020240312165956.png)
+		- thread를 이런 모양으로 만드면 warp가 이렇게 잡힌다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240312165837.png)
+		- Cache적 관점에서는 thread를 이렇게 만드는 게 났다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240312165956.png)
 	1. Grid: Thread block의 묶음
 		- Grid dimension: Thread block의 개수이다.
 	2. Warp: GPU가 thread block에서 32개씩 쪼개간다. 왜 그런지는 묻지 마라.
 		- 이렇게 32개로 묶어놓은 것을 warp라고 한다. 256개로 이루어진 thread block이라면 8 warp로 쪼개지는 것이다. 바로 이 32개가 SIMD 형태로 돈다.
 		- 하나의 명령만이 적용되어 병렬처리 된다는 것이다. 각각의 warp들은 순차적이 아니라 독립적으로 처리된다. warp가 모두 처리 되면 하나의 thread block의 task가 끝난 것이다.
-		- Warp의 크기는 *32*로 고정이다.![점선 오류 났어유](../../../../z.%20Docs/img/Pasted%20image%2020240307171134.png)
+		- Warp의 크기는 *32*로 고정이다.![점선 오류 났어유](../../../../Z.%20Docs/img/Pasted%20image%2020240307171134.png)
 
 ## 1.11 NVIDIA GPU Generation
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240307173212.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240307173212.png)
 - GeForce에서 그래픽 기능을 빼버린 게 Tesla이다.
 - Quadro는 tesla의 장점에 그래픽까지 껴 놓은 것이다. 한 마디로 명품 GPU.
 - Compute Capability: GPU의 기능 (본인은 Turing에 해당하는 capability이다.)
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240307173741.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240307173741.png)
 - **SM(Streaming multiprocessor)**: CUDA core를 여러 개 모아놓은 것
 - L1 Cache/Shared Memory: L1 Cache만큼 빠른 메모리를 잡아서 프로그래밍 하는 것
 - 82.6 TFLOP의 계산과정은 위에 나와있다. 이거의 $\frac{1}{10}$ 정도가 나오도록 코딩하는 것을 목표로 잡으면 된다. 
 - Memory Bandwidth: 메모리에서 데이터가 올라오는 속도
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240307173716.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240307173716.png)
 
 ## 1.12 ADA AD102 GPU
 
@@ -125,13 +125,13 @@ else if(obj.1) {
 	- 2개의 SM
 	- 1개의 PolyMorph Engine
 - **SM**: `스레드의 관점에서는 SM이 가장 중요한 프로세싱 단위이다.`
-	![](../../../../z.%20Docs/img/Pasted%20image%2020240312173333.png)
+	![](../../../../Z.%20Docs/img/Pasted%20image%2020240312173333.png)
 	- CUDA core를 여러 개 박아놓은 것
 		- CUDA core는 streaming processor라고도 한다.
 	- 128 KB의 L1 Cache/Shared memory
 	- 4개의 Texture Units
 	- 1개의 $3^{rd}$ Gen. RT core
-	- 2개의 FP64 units: `나는 정밀도가 중요해서 double precision으로 갈거야! 그럼 속도가 128 : 2라 64배 느려짐..`![](../../../../z.%20Docs/img/Pasted%20image%2020240312172405.png)
+	- 2개의 FP64 units: `나는 정밀도가 중요해서 double precision으로 갈거야! 그럼 속도가 128 : 2라 64배 느려짐..`![](../../../../Z.%20Docs/img/Pasted%20image%2020240312172405.png)
 	- 각각의 processing block:
 		- 16개의 FP32: 한 순간에 floating point계산을 해준다.
 		- 16개의 FP32/INT32: 같은 clock에 floating point 연산을 하거나 int 연산을 해준다.
@@ -155,7 +155,7 @@ else if(obj.1) {
 ## 1.13 Warp Processing on the SM
 
 [WARP Execution (tistory.com)](https://junstar92.tistory.com/277)
-![](../../../../z.%20Docs/img/Pasted%20image%2020240314171217.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240314171217.png)
 - Stall: memory에 access하거나..하는 delay..를! 번갈아가며 명령을 수행하게 함으로서 delay를 줄인다.
 - _syncwarp()를 시켜 Z; 뒤에 일어날 명령을 warp에서 한꺼번에 할 수 있도록 sync 시켜준다.
 
@@ -171,7 +171,7 @@ else {
 	z[i] = 2 * x[i] + y[i];
 }
 ```
-- 이것과 같은 코드가 있을 때, 와프에서는 다음과 같이 동작하게 된다. ![](../../../../z.%20Docs/img/Pasted%20image%2020240314170447.png)
+- 이것과 같은 코드가 있을 때, 와프에서는 다음과 같이 동작하게 된다. ![](../../../../Z.%20Docs/img/Pasted%20image%2020240314170447.png)
 - 그래서 최대한 branch code (switch나 if 등)을 줄이는 것이 좋다.
 - Inactive thread 판별:
 	- 먼저 끝난 스레드
@@ -179,19 +179,19 @@ else {
 	- 순서가 32의 배수가 아닌 스레드
 
 - Concurrent thread execution:
-	- 이렇게 같은 곳으로 store 될때, 어느 순서로 store 될지는 모른다.![](../../../../z.%20Docs/img/Pasted%20image%2020240314172907.png)
+	- 이렇게 같은 곳으로 store 될때, 어느 순서로 store 될지는 모른다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240314172907.png)
 - SIMD vs SIMT:
-	- 단일 명령어, 다중 스레드(SIMT, single instruction, multiple thread)는 병렬 컴퓨팅에서 사용되는 실행 모델로, 단일 명령어, 다중 데이터(SIMD)가 다중 스레드와 결합된다.![](../../../../z.%20Docs/img/Pasted%20image%2020240314173141.png)
+	- 단일 명령어, 다중 스레드(SIMT, single instruction, multiple thread)는 병렬 컴퓨팅에서 사용되는 실행 모델로, 단일 명령어, 다중 데이터(SIMD)가 다중 스레드와 결합된다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240314173141.png)
 
 ## 1.14 GPU Memory Hierarchy
 
 ## 1.15 Scalable Programming Model for GPU
 
-- GPU는 scalable 하다. 라는 것은 SM의 개수가 프로그램을 짜는 방식에 영향을 미치지 않는다.<br>![](../../../../z.%20Docs/img/Pasted%20image%2020240314173328.png)
+- GPU는 scalable 하다. 라는 것은 SM의 개수가 프로그램을 짜는 방식에 영향을 미치지 않는다.<br>![](../../../../Z.%20Docs/img/Pasted%20image%2020240314173328.png)
 
 ## 1.16 CPU vs GPU
 
-- CPU는 task parallelism하고, GPU는 Data Parallelism하다. CPU는 스레드가 많아봐야 몇십개 돌지만, GPU는 스레드가 몇십만 개도 돌고 있다. `GPU 참... 무식하게도 생겼다.`![](../../../../z.%20Docs/img/Pasted%20image%2020240314173445.png)
+- CPU는 task parallelism하고, GPU는 Data Parallelism하다. CPU는 스레드가 많아봐야 몇십개 돌지만, GPU는 스레드가 몇십만 개도 돌고 있다. `GPU 참... 무식하게도 생겼다.`![](../../../../Z.%20Docs/img/Pasted%20image%2020240314173445.png)
 
 ## 1.17 CUDA Execution Model
 
@@ -200,7 +200,7 @@ else {
 각각의 픽셀이 각각의 task라고 생각하자.
 
 Task와 CUDA thread간의 mapping관계는 다음과 같이 두 종류가 있다.
-![](../../../../z.%20Docs/img/Pasted%20image%2020240314174046.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240314174046.png)
 - 각각의 task에 대해서 thread 하나씩
 - (Data가 클 경우) Thread를 건너뛰면서 CUDA 스레드 하나에 여러개의 task 할당
 
@@ -223,7 +223,7 @@ Task와 CUDA thread간의 mapping관계는 다음과 같이 두 종류가 있다
 
 ## 1.18 CUDA Programming Model
 
-- CUDA 프로그래밍을 하려면 다음과 같은 정보는 읽을 줄 알아야 한다.![](../../../../z.%20Docs/img/Pasted%20image%2020240321164222.png)
+- CUDA 프로그래밍을 하려면 다음과 같은 정보는 읽을 줄 알아야 한다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240321164222.png)
 $$
 \begin{align}
 &(x_{1D}, y_{2D}, z_{3D}) \\
@@ -237,7 +237,7 @@ $$
 
 ### 1.18.1 Sample Program: vectorAdd_24_simple.cu
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240321164713.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240321164713.png)
 - Main memory / GPU memory
 - .cpp program / .cu program
 - PINED(page-locked memory): [Pinned Memory (tistory.com)](https://junstar92.tistory.com/284)
@@ -278,19 +278,19 @@ $$
 	- threadIdx: 내가 속한 thread 속에서의 index
 
 #### 1D Example
-![](../../../../z.%20Docs/img/Pasted%20image%2020240321173909.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240321173909.png)
 - blockDim: $(2^8, 1, 1)$
 - `구구단 외듯이 외우셈~`
 $$\text{현재 thread의 전체 idx} = blockDim.x \times blockIdx.x + threadIdx.x$$
 
 #### 2D Example
-![](../../../../z.%20Docs/img/Pasted%20image%2020240326164108.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240326164108.png)
 $$\begin{align}
 \text{현재 thread의 전체 idx} = gridDom.x \times blockDim.x \times \\
 (blockDim.y \times blockIdx.y + threadIdx.y) + \\
 blockDim.x \times blockIdx.x + threadIdx.x
 \end{align}$$
-- threadID: 한 thread block 내의 thread의 순서 (1D와 2D같은 경우 계산 방식이 다름)![](../../../../z.%20Docs/img/Pasted%20image%2020240326164956.png)
+- threadID: 한 thread block 내의 thread의 순서 (1D와 2D같은 경우 계산 방식이 다름)![](../../../../Z.%20Docs/img/Pasted%20image%2020240326164956.png)
 $$threadID_{2D} = blockDim.x \times threadIdx.y + threadIdx.x$$
 - 한 TB 안에 최대 스레드 수는 **1024개**이다.
 - warp는 32개임에 의거하여 실제로 $64 \times 16$, $32 \times 32$, $16 \times 64$, $8 \times 32$ 순으로 performance가 느려지는 것을 볼 수 있다.
@@ -324,7 +324,7 @@ $$threadID_{2D} = blockDim.x \times threadIdx.y + threadIdx.x$$
 
 #### Single precision
 > 4 bytes (32 bits)
-- 구조는 다음과 같다.![](../../../../z.%20Docs/img/Pasted%20image%2020240404172339.png)
+- 구조는 다음과 같다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240404172339.png)
 - 구성은 다음과 같다.
 	- Sign indicator: $(-1)^S, \ S = 0 \ or 1$
 	- Exponent Characteristic:
@@ -335,10 +335,10 @@ $$threadID_{2D} = blockDim.x \times threadIdx.y + threadIdx.x$$
 
 #### Double precision
 > 8 bytes (64 bits)
-- 구조는 다음과 같다.![](../../../../z.%20Docs/img/Pasted%20image%2020240404172402.png)
+- 구조는 다음과 같다.![](../../../../Z.%20Docs/img/Pasted%20image%2020240404172402.png)
 
 #### Format of Single & Double Precision
-- 여기서 Single의 유효숫자 9와 double의 유효숫자 17은 믿을만한지 다시 한 번 생각해 볼 필요가 있다..![](../../../../z.%20Docs/img/Pasted%20image%2020240404173606.png)
+- 여기서 Single의 유효숫자 9와 double의 유효숫자 17은 믿을만한지 다시 한 번 생각해 볼 필요가 있다..![](../../../../Z.%20Docs/img/Pasted%20image%2020240404173606.png)
 
 ### 2.1.2 Floating-Point Operations
 
@@ -405,7 +405,7 @@ for (int m = N / 2; m > 0; m /= 2) {
 cudaDeviceSynchronize();
 CHECK_TIME_END(_start, _end, _freq, _compute_time);
 ```
-![](../../../../z.%20Docs/img/Pasted%20image%2020240326173614.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240326173614.png)
 - reduce0에서 사용하는 prarllel computing 알고리즘:
 	- 종이를 반씩 접는다고 생각
 	- 매 지점마다 sunc를 맞춰줘야 한다. 동일한 크기의 TB로 할당하기 때문에 같이 계산해야되는 TB끼리 단계를 맞춰줘야하기 때문이다.
@@ -444,7 +444,7 @@ m
 	- 일을 안하고 노는 SM이 너무 많다!
 
 #### reduce0 vs reduce1
-![](../../../../z.%20Docs/img/Pasted%20image%2020240404164701.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240404164701.png)
 - 왜 동일한 GPU 상에서의 결과 값이 미묘하게 변화하였을까?
 	A) 더하는 순서가 바뀌었기 때문이다.
 - reduce0의 컴파일 모습
@@ -479,7 +479,7 @@ st(store) r6, x[tid]
 ## 3.1 CUDA Memory Hierarchy
 
 GPU -> GPC -> TPC -> SM
-![](../../../../z.%20Docs/img/Pasted%20image%2020240409173503.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240409173503.png)
 ##### On-chip memory and cache
 - Register
 - Shared memory / L1 cache / Texture cache
@@ -494,12 +494,12 @@ GPU -> GPC -> TPC -> SM
 
 ### 3.1.1 Scope and Lifetime
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240409174120.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240409174120.png)
 - Register and local memory: Per thread
 - Shared memory: Per thread block
 - Global, constant, texture memory: persistent across kernel launches by the same application
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240411163813.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240411163813.png)
 - Scope: 어떠한 변수가 영향을 미치는 범위
 - Lifetime: 어떠한 변수를 쓸 수 있는 수명
 - Automatic variable: 특정한 함수 안에서만 사용하는 변수
@@ -524,7 +524,7 @@ GPU -> GPC -> TPC -> SM
 
 ### 3.1.3 Shared Memory Bank Conflict
 
-![](../../../../z.%20Docs/img/Pasted%20image%2020240411172554.png)
+![](../../../../Z.%20Docs/img/Pasted%20image%2020240411172554.png)
 - bank bandwidth = 32 bits / clock
 - Shared memory의 bandwidth = 128 bytes / clock
 
@@ -714,7 +714,7 @@ jmp cost를 줄임. sweet point가 있음.
 > 행렬계산에 최적화해준다.
 
 여러 소프트웨어 알고리즘으로 가속해보자.
-![600](../../../../z.%20Docs/img/Pasted%20image%2020240430164950.png)
+![600](../../../../Z.%20Docs/img/Pasted%20image%2020240430164950.png)
 
 # 4.
 
@@ -725,7 +725,7 @@ TF32: FP32와 같은 range로 계산 하지만 정밀도를 떨어뜨림
 BF15 FP16의 문제, 정밀도를 떨어트리더라도 range를 같이 하고 정밀도를 떨어트림
 -> range vs 정밀도
 
-![600](../../../../z.%20Docs/img/Pasted%20image%2020240502173228.png)
+![600](../../../../Z.%20Docs/img/Pasted%20image%2020240502173228.png)
 Volta: $4 \times 4 \times 4$ 행렬 곱셈을 1 clock
 Ampere: $8 \times 4 \times 8$ 행렬 곱셈을 1clock
 `mma_sync(); // a * b + c`
@@ -833,7 +833,7 @@ cudaMemcpyAsync()
 
 #### Virtual Memory
 > 물리적 Memory의 한계를 "숨기기"위해 가상의 메모리 영역을 할당하는 것.
-![400](../../../../z.%20Docs/img/Pasted%20image%2020240514174140.png)
+![400](../../../../Z.%20Docs/img/Pasted%20image%2020240514174140.png)
 - Pageable data transfer:
 	pinned로 옮겨지고 transfer된다.
 	`malloc()`, `cudaMemcpy()`
@@ -1117,17 +1117,17 @@ cudaEventSymchronize(stop);
 	- 246-280(..?): `cudaStreamWaitEvent`를 사용하여 dependency를 주고 있다.
 	올바르게 작동한다.
 	약 25ms
-	![600](../../../../z.%20Docs/img/Pasted%20image%2020240528172431.png)
+	![600](../../../../Z.%20Docs/img/Pasted%20image%2020240528172431.png)
 - `test_2() - Non-null Streams with Dependency`:
 	이제 $K_S$와 $K_A$ 모두 보자.
 	- 각각의 segment를 채우기 위한 명령어들을 나열한 다음 stream에 parallel하게 넣고 event로 dependency를 주고 있다.
 	- S2와 S3는 K수행 후 바로 Host로 가져올 수 있는데 죽치고 기다리고 있는 것을 볼 수 있다. 이게 5ms 차이의 이유이다. 즉, 27, 28번 명령어는 dependency가 없는데도 늦게 수행되는 것이다.
 	- D2H 대기의 이유:`실제로 같은 종류의 명령어들끼리 순서를 이루어서 한 queue로 들어가는 것 같다고 추청 중`
 	약 45ms
-	![500](../../../../z.%20Docs/img/Pasted%20image%2020240528174047.png)
+	![500](../../../../Z.%20Docs/img/Pasted%20image%2020240528174047.png)
 - `test_3() - Non-null Streams with Dependency`:
 	약 40ms
-	![500](../../../../z.%20Docs/img/Pasted%20image%2020240528174114.png)
+	![500](../../../../Z.%20Docs/img/Pasted%20image%2020240528174114.png)
 
 `plus alpha: Isosurfacing`
 `plus aplha: marching cube`
@@ -1290,14 +1290,14 @@ void sequential_scan(float *x, float *y, unsigned int N) {
 
 Input Data
 iso value = 4라고 했을 때, 다음과 같이 표면을 찾을 수 있다.
-![300](../../../../z.%20Docs/img/Pasted%20image%2020240611170626.png)
+![300](../../../../Z.%20Docs/img/Pasted%20image%2020240611170626.png)
 
 output surface
-![300](../../../../z.%20Docs/img/Pasted%20image%2020240611170736.png)
+![300](../../../../Z.%20Docs/img/Pasted%20image%2020240611170736.png)
 하나하나 square를 marching하면서 계산하기 때문에 marching square라고 한다.
 
 3차원 공간에서는 다음과 같이 표현이 된다.
-![300](../../../../z.%20Docs/img/Pasted%20image%2020240611170829.png)
+![300](../../../../Z.%20Docs/img/Pasted%20image%2020240611170829.png)
 하나하나 cube를 marching하면서 계산하기 때문에 marching cube라고 한다.
 흰색: iso value보다 큼
 검은색: iso value보다 작음
@@ -1305,9 +1305,9 @@ output surface
 - **voxel**(꼭짓점, 교차점) 8개로 육면체로 만든 것을 **cell**이라고 한다.
 
 총 256가지 경우가 나올 수 있는데, 테트리스 처럼 대칭을 제하고 나면 다음과 같이 15가지 경우가 나온다.
-![500](../../../../z.%20Docs/img/Pasted%20image%2020240611171243.png)
+![500](../../../../Z.%20Docs/img/Pasted%20image%2020240611171243.png)
 
-![500](../../../../z.%20Docs/img/Pasted%20image%2020240611171357.png)
+![500](../../../../Z.%20Docs/img/Pasted%20image%2020240611171357.png)
 점 사이의 Iso Value에 해당하는 값을 찾기 위해 다음과 같은 선형 보간 식을 쓴다는 것에 의의는 없을 것이다.
 $$P = P_1\frac{|v - v_2|}{|v_2 - v_1|}+P_2\frac{|v - v_1|}{|v_2 - v_1|}$$
 
@@ -1363,7 +1363,7 @@ __device__ uint3 calcGridPos(uint i, uint3 gridSizeShift, uing3 gridSizeMask) {
 # $\beta$. Marching Cubes J_Hert
 
 #### Marching Square
-![200](../../../../z.%20Docs/img/Pasted%20image%2020240613164938.png)
+![200](../../../../Z.%20Docs/img/Pasted%20image%2020240613164938.png)
 - 각각의 cell에서 나올 수 있는 선분의 종류는 총 16개인 것을 알 수 있다.
 ```
 Isovalue = a;

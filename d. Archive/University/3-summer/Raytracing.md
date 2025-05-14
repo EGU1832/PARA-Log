@@ -21,7 +21,7 @@
 - **AI 기술**과 통합하여 Ray Tracing 이미지의 품질을 향상시킬 수 있다.
 
 OptiX 7의 **Computation Pipeline**은 다음과 같다.
-![](../../../z.%20Docs/img/Pasted%20image%2020240715170413.png)
+![](../../../Z.%20Docs/img/Pasted%20image%2020240715170413.png)
 
 #### 5 Types of Ray Tracing Shaders
 > 크게 다른 Shader를 컨트롤하는 **Ray Generation Shader**와,
@@ -39,7 +39,7 @@ OptiX 7의 **Computation Pipeline**은 다음과 같다.
 >> Rendering Equation과 Volume Rendering Equation에 의해 기술되는 물리적인 현상을 **실용적인** 렌더링 알고리즘을 사용하여 **효과적으로** 시뮬레이션하여 **사실적인** 영상을 생성한다.
 
 **Rendering Equation** (Surface, 표면 반사만 일어남)
-![300](../../../z.%20Docs/img/Pasted%20image%2020240715152030.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240715152030.png)
 $$\begin{align} L_O(x, \vec \omega) &= L_e(x, \vec\omega) + L_r(x, \vec\omega) \\ &= L_e(x, \vec\omega) + \int_\Omega f_r(x, \vec\omega', \vec\omega)L_i(x, \vec\omega')(\vec\omega'\cdot\vec{n})d\vec\omega' \\ &= \text{x가 카메라 방향으로 스스로 내는 빛} + \text{x에서 카메라 방향으로 방사되는 빛}&\end{align}$$
 - $L_O(x, \vec\omega)$: Outgoing Radiance
 - $L_e(x, \vec\omega)$: Emitted Radiance
@@ -48,7 +48,7 @@ $$\begin{align} L_O(x, \vec \omega) &= L_e(x, \vec\omega) + L_r(x, \vec\omega) \
 
 
 **Volume Rendering Equation** (Participating Media, 표면 반사와 매질 투과가 일어남)
-![450](../../../z.%20Docs/img/Pasted%20image%2020240715152100.png)
+![450](../../../Z.%20Docs/img/Pasted%20image%2020240715152100.png)
 ![450](https://dapeng-xu.github.io/html/vis_avs/four_kinds_of_interaction.JPG)
 $$\begin{align} L(x, \vec \omega) &= L(x + s\vec\omega, \vec\omega)e^{-\int^s_0\sigma_t(x+s'\vec\omega)ds'} + \int^s_0{L_e(x + s'\vec\omega)e^{-\int^{s'}_0\sigma_t(x+t\vec\omega)dt}ds'}\\ &+\int^s_0\{e^{-\int^{s'}_0\sigma_t(x+t\vec\omega)dt}\sigma_z(x+s'\vec\omega)\int_{\Omega_{4\pi}}p(x+s'\vec\omega, \vec\omega', \vec\omega)L(x+s'\vec\omega, \vec\omega')d\vec\omega'\}ds'\end{align}$$
 - $L(x, \vec \omega)$: Outgoing Radiance
@@ -104,7 +104,7 @@ $$\begin{align} L(x, \vec \omega) &= L(x + s\vec\omega, \vec\omega)e^{-\int^s_0\
 - Image Space에서 화면을 통과하는 광선을 추적하여 2D 이미지 생성
 
 #### Ray Tracing in View of Rendering Equation
-![300](../../../z.%20Docs/img/Pasted%20image%2020240715185755.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240715185755.png)
 
 
 ## 1.2 Classical (Whitted-style) Ray Tracing
@@ -153,7 +153,7 @@ $$\begin{align} I_{\lambda}(P) &= I_{\lambda}^{local}(P)+k_s\lambda \cdot I_{\la
 	- 표면이 아닌 매질의 광학적 특성, 예를 들어 공기나 물과 같은 매질을 통과하는 빛의 흡수와 산란 등은 전통적인 Ray Tracing에서 직접적으로 고려되지 않는다.
 
 **Recursive Formula**
-![300](../../../z.%20Docs/img/Pasted%20image%2020240719133432.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240719133432.png)
 $$\begin{align} I_{\lambda}(P) &= I_{\lambda}^{local}(P)+k_s\lambda \cdot I_{\lambda}(P_r)+k_{t\lambda}\cdot I_\lambda(P_t)\end{align}$$
 - $I_{\lambda}(P)$: 
 - $I_{\lambda}^{local}(P)$: Shadow Feelers, 광원에서 직접 들어오는 빛
@@ -171,7 +171,7 @@ $$\begin{align} I_{\lambda}(P) &= I_{\lambda}^{local}(P)+k_s\lambda \cdot I_{\la
 
 먼저 CSE4170에서 배웠던 내용을 복기하며 다음 내용을 보자.
 
-![350](../../../z.%20Docs/img/Pasted%20image%2020240719142857.png)
+![350](../../../Z.%20Docs/img/Pasted%20image%2020240719142857.png)
 `gluLookAt(*)`의 결과로 다음과 같은 output이 나온다.
 $$\begin{align}e &= (e_x, e_y, e_z) \\ u &= (u_x, u_y, u_z) \\ v &= (v_x, v_y, v_z) \\ n &= (n_x, n_y, n_z)\end{align}$$
 - $e$: 카메라(눈)의 위치
@@ -195,7 +195,7 @@ $$s = (s_x, s_y, s_z)$$
 #### Ray Calculation for (i, j)-th Image Pixel
 > 이제 위의 과정을 실제 식으로 나타내보자.
 
-![300](../../../z.%20Docs/img/Pasted%20image%2020240719142857.png)![300](../../../z.%20Docs/img/Pasted%20image%2020240514123644.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240719142857.png)![300](../../../Z.%20Docs/img/Pasted%20image%2020240514123644.png)
 $$\begin{align} &e, u, v, n \\
 &w_c = e - d \cdot n \\
 &w_h = 2d \tan({\frac{fovy}{2}}), w_w = aspect \cdot w_h \\
@@ -342,7 +342,7 @@ $$R=2(V \circ N)N - V$$
 - 방식은 위와 같다. 다만 굴절각 $T$를 구하는 방식이 특별하다. `Snell's Law`
 - 마치 $p(t, P, R)$ 즉 투영각으로 나가는 Ray가 Primary Ray(Eye Ray)인 것처럼 가정하고 Recursive하게 $I_\lambda(P_t)$를 계산한다.
 - **Snell's Law**:
-	![250](../../../z.%20Docs/img/Pasted%20image%2020240719170357.png)
+	![250](../../../Z.%20Docs/img/Pasted%20image%2020240719170357.png)
 	- 빛이 한 매질에서 다른 매질로 진행할 때, 빛의 굴절 현상을 설명하는 법칙이다. 이 법칙은 빛의 입사각과 굴절각 사이의 관계를 설명하며, 빛이 두 매질의 경계면에서 굴절되는 각도를 계산하는 데 사용된다.
 	- Snell's Law는 다음과 같이 수학적으로 표현된다.$$\begin{align}n_i\sin\theta_1 = n_2\sin\theta_2 \\ \frac{\sin\theta_1}{\sin\theta_2} = \frac{\eta_2}{\eta_1} = \eta_{21}\end{align}$$
 	- $n_1, n_2$: 첫 번째 매질과 두 번째 매질의 굴절률(refractive index)
@@ -350,7 +350,7 @@ $$R=2(V \circ N)N - V$$
 	- $\theta_2$: 굴절각(refracted angle), 두 번째 매질의 법선에 대한 굴절 광선의 각도
 	- $\eta_{i}$: 진공에 대한 매질 $i$의 굴절률
 - **Calculate $T$ with Snell's Law**
-	![250](../../../z.%20Docs/img/Pasted%20image%2020240719171832.png)![300](https://redirect.cs.umbc.edu/~rheingan/435/pages/res/illum/illum16e.gif)
+	![250](../../../Z.%20Docs/img/Pasted%20image%2020240719171832.png)![300](https://redirect.cs.umbc.edu/~rheingan/435/pages/res/illum/illum16e.gif)
 	- 굴절각 $T$를 구하는 식은 다음과 같다.$$\begin{align}&T = \sin{\theta_2}M - \cos{\theta_2}N \\ &I_{perp} = I + \cos{\theta_1}N = I + c_1N \ \ (c_1 \equiv \cos{\theta_1}) \\ &M = \frac{I_{perp}}{||I_{perf}||} = \frac{I+c_1N}{\sin{\theta_1}} \\ &T = \frac{\sin{\theta_2}}{\sin{\theta_1}}(I+c_1N) - \cos{\theta_2}N = \eta I + (\eta c_1 - c_2)N \\ &\text{where } \eta \equiv \frac{\sin{\theta_2}}{\sin{\theta_1}} = \frac{n_1}{n_2} \text{ and } \\ &c_2 \equiv \cos{\theta_2} = \sqrt{1 - \sin^2{\theta_2}} = \sqrt{1 - \eta2\sin^2{\theta_1}} = \sqrt{1 - \eta^2(1 - c^2_1)}\end{align}$$
 	- 즉 필요한 값은 두 매질 사이의 굴절률 $\eta_i$의 비율(ratio) $\eta$와, 입사각$\theta_1$과 굴절각 $\theta_2$이다.
 
@@ -358,7 +358,7 @@ $$R=2(V \circ N)N - V$$
 > 빛이 고굴절률 매질에서 저굴절률 매질로 진행할 때 특정 조건에서 발생하는 현상으로, 빛이 매질 경계를 넘지 못하고 완전히 반사되는 현상
 >> Ray Tracing에선 $T$ Ray와 관련된 특정 현상이라고 생각하면 된다.
 
-![250](../../../z.%20Docs/img/Pasted%20image%2020240719184622.png)  ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgoVJAlUaOi_Zguzjj_RGfIivM3fIdGZJ52j2znk6-7y4SC9o4q-5A_0dM-DP_zrAtZVE&usqp=CAU)
+![250](../../../Z.%20Docs/img/Pasted%20image%2020240719184622.png)  ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgoVJAlUaOi_Zguzjj_RGfIivM3fIdGZJ52j2znk6-7y4SC9o4q-5A_0dM-DP_zrAtZVE&usqp=CAU)
 먼저 Snell's Law의 공식을 상기해보자.
 $$\frac{\sin\theta_1}{\sin\theta_2} = \frac{\eta_2}{\eta_1} = \eta_{21}$$
 
@@ -389,7 +389,7 @@ $$\frac{\sin\theta_1}{\sin\theta_2} = \frac{\eta_2}{\eta_1} = \eta_{21}$$
 - 물론 TIR 현상이 일어날 경우, $R(\theta_1) = 1$이 되므로 Fresnel Equation을 적용할 필요가 없을 것이다.
 
 이를 바탕으로 다음 그래프를 보자.
-![600](../../../z.%20Docs/img/Pasted%20image%2020240719192135.png)
+![600](../../../Z.%20Docs/img/Pasted%20image%2020240719192135.png)
 잘 보면 엄청 작은 점이 보일 것이다. 그것이 바로 Schlick의 근사를 이용해 근사한 것이다.
 - $\eta_1 = 1, \eta_2 = 1.33$:
 	- 대표적인 예로 `공기 -> 물`이 있다.
@@ -416,7 +416,7 @@ R_{Schlick}(\theta_1) &= R_0 + (1 - R_0)(1 - C)^5 \end{align}$$
 \end{CD}
 $$
 - 다음과 같이 $\eta_2$가 증가하면 근사치가 부정확해진다.
-	![250](../../../z.%20Docs/img/Pasted%20image%2020240719200213.png)
+	![250](../../../Z.%20Docs/img/Pasted%20image%2020240719200213.png)
 
 #### A Simple Whitted-style Ray Tracer
 > 이제 위에서 공부한 것을 바탕으로 간단한 Whitted-style Ray Tracer를 작성해보자.
@@ -537,7 +537,7 @@ Local, Reflection, Refraction Ray와 관련된 **Miss, Clossest-hit, Any-hit Sha
 - 근이 있다면 근의 +, - 성질에 따라 교차점에 해당하는 값을 반환한다.
 
 **Calculate**
-![300](../../../z.%20Docs/img/Pasted%20image%2020240722171017.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240722171017.png)
 $$
 \begin{align}
 &(x-g_x)^2+(y-g_y)^2+(z-g_z)^2-r^2 = 0 \\
@@ -579,7 +579,7 @@ return NO_INTERSECT;
 - Plane Equation의 $p$에 Ray 함수를 대입하여 방정식을 계산한다.
 
 **Calculate**
-![400](../../../z.%20Docs/img/Pasted%20image%2020240722171042.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240722171042.png)
 - 법선 벡터 (Normal Vector): $$n = \frac{u\times v}{||u \times v||},\ (u \circ v = 0)$$
 - 방정식의 형성: $$\begin{align}&\text{Plane equation: } n\circ(p-a) = n \circ p - n \circ a = 0 \\ &\text{Ray-plane intersection: } n\circ (e+td)-n\circ a = 0 \\&\rightarrow (n\circ d)t = n \circ (a-e) \\\end{align}$$
 - 방정식의 계산:
@@ -611,7 +611,7 @@ $$
 - 또한 3차원 -> 2차원 투영시 최적화 개념도 나오니 이 부분도 잘 보고 가도록 하자.
 
 **Calculation**
-![400](../../../z.%20Docs/img/Pasted%20image%2020240722213000.png) ![](../../../z.%20Docs/img/Pasted%20image%2020240725173622.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240722213000.png) ![](../../../Z.%20Docs/img/Pasted%20image%2020240725173622.png)
 - 법선 벡터 (Normal Vector): $$n = \frac{u\times v}{||u \times v||},\ (u \circ v \neq 0)$$
 - 방정식의 형성: $$\begin{align}&\text{Plane equation: } n\circ(p-a) = n \circ p - n \circ a = 0 \\ &\text{Ray-plane intersection: } n\circ (e+td)-n\circ a = 0 \\&\rightarrow (n\circ d)t = n \circ (a-e) \\\end{align}$$
 - 방정식의 계산:
@@ -653,13 +653,13 @@ $$
 >> $p(t)$에서 normal을 얻는 방법
 
 다음과 같이 세 변이 각각 $(p_0, p_1, p_2)$인 삼각형과 그 속에 점 $p$가 있다고 하자.
-![160](../../../z.%20Docs/img/Pasted%20image%2020240725181650.png)
+![160](../../../Z.%20Docs/img/Pasted%20image%2020240725181650.png)
 - Barycentric Coordinates에선 점 $p$를 삼각형의 세 꼭짓점 $(p_0, p_1, p_2)$로 나타낸다.
 - $p = s\times p_0 + t \times p_2 + r\times p_2$로, $s+t+r = 1$이다.
 - 표기: $p(s, t, r)$또는 $p(s, t, 1-s-t)$또는 $p(s, t)$, 여기서는 $p(s, t)$를 쓰는 듯 하다.
 
 $s, t, r$의 의미는 $p$를 기준으로 나뉘는 삼각형 $P$ 속의 방향성이 있는 면적의 비율이다.
-![160](../../../z.%20Docs/img/Pasted%20image%2020240725182427.png)
+![160](../../../Z.%20Docs/img/Pasted%20image%2020240725182427.png)
 - $s=\frac{Area(p, p_1, p_2)}{Area(p_0, p_1, p_2)}$
 - $t=\frac{Area(p, p_2, p_0)}{Area(p_0, p_1, p_2)}$
 - $r=\frac{Area(p, p_0, p_1)}{Area(p_0, p_1, p_2)} = 1-s-t$
@@ -679,7 +679,7 @@ Barycentric Coordinates의 활용은 다음과 같다:
 이제 BArycnetric Coordinate System을 이용해 표현된 교차점 $p$를 생각하며 식을 세워나가보자.
 
 **Calculation**
-![350](../../../z.%20Docs/img/Pasted%20image%2020240725185859.png)
+![350](../../../Z.%20Docs/img/Pasted%20image%2020240725185859.png)
 - 방정식의 형성:
 $$
 \begin{align}

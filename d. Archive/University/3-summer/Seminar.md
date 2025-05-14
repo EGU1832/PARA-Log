@@ -66,7 +66,7 @@ createBottomAcceleration..() {
 CSE4170 강의자료 5 43p.
 ###### Setup for Viewing Volume
 > glm::mat4 perspective(float fovy, float aspect, float zNear, float zFar);
-![400](../../../z.%20Docs/img/Pasted%20image%2020240514123644.png)
+![400](../../../Z.%20Docs/img/Pasted%20image%2020240514123644.png)
 - `fovy`: 위 아래 각도
 - `aspect`: $w/h$ 가로 세로 비율
 - `zNear`: 앞 절단 평면까지의 거리
@@ -110,7 +110,7 @@ vec4 direction = cam.viewInverse * vec4.. //
 - 근이 있다면 근의 +, - 성질에 따라 교차점에 해당하는 값을 반환한다.
 
 **Calculate**
-![300](../../../z.%20Docs/img/Pasted%20image%2020240722171017.png)
+![300](../../../Z.%20Docs/img/Pasted%20image%2020240722171017.png)
 $$
 \begin{align}
 &(x-g_x)^2+(y-g_y)^2+(z-g_z)^2-r^2 = 0 \\
